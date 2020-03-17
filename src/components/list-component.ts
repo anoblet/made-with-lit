@@ -1,15 +1,29 @@
-import { css, customElement, html, LitElement, property } from "lit-element";
+import { deleteDocument } from "@anoblet/firebase";
+import "@material/mwc-icon";
+import "@material/mwc-icon-button";
 import "@material/mwc-list";
 import "@material/mwc-list/mwc-list-item";
-import "@material/mwc-icon-button";
-import "@material/mwc-icon";
+import { css, customElement, html, LitElement, property } from "lit-element";
+import "./list-item-component";
 
 @customElement("list-component")
 export class ListComponent extends LitElement {
     @property({ type: Array }) items: any[];
 
+    delete({ target }) {
+        deleteDocument(`items/${this.items[target.dataset.index].id}`);
+    }
+
+    edit({ target }) {
+        const index = target.dataset.index;
+    }
+
     public static get styles() {
         return css`
+            :host {
+                display: grid;
+                grid-gap: 1rem;
+            }
             a {
                 text-decoration: none;
             }
@@ -22,21 +36,14 @@ export class ListComponent extends LitElement {
 
     public render() {
         return html`
-            <mwc-list>
-                ${this.items.map(
-                    item =>
-                        html`
-                            <mwc-list-item hasMeta>
-                                ${item.title}<span class="item-address">
-                                    - ${item.address}</span
-                                >
-                                <span slot="meta"
-                                    ><mwc-icon>more_vert</mwc-icon></span
-                                >
-                            </mwc-list-item>
-                        `
-                )}
-            </mwc-list>
+            ${this.items.map(
+                (item, index) =>
+                    html`
+                        <list-item-component
+                            .item=${item}
+                        ></list-item-component>
+                    `
+            )}
         `;
     }
 }

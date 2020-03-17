@@ -3,8 +3,6 @@ import {
     showUpdateSnackbar,
     registerServiceWorker
 } from "@victorycto/web-utilities";
-import { html } from "lit-element";
-import { render } from "lit-html";
 import "./components/shell-component";
 
 const firebaseConfig = {

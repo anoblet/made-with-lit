@@ -51,10 +51,12 @@
         "@material/mwc-drawer": "^0.13.0",
         "@material/mwc-icon-button": "^0.13.0",
         "@material/mwc-list": "^0.13.0",
+        "@material/mwc-menu": "^0.13.0",
         "@material/mwc-snackbar": "^0.13.0",
         "@material/mwc-textfield": "^0.13.0",
         "@material/mwc-top-app-bar": "^0.13.0",
         "@victorycto/web-utilities": "git+https://github.com/VictoryCTO/vp-lib.git",
+        "lit-html": "^1.2.0-pre.1",
         "workbox-window": "^5.0.0"
     }
 }
