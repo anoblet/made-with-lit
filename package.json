@@ -10,7 +10,7 @@
         "dev": "npm-run-all -p build:watch start",
         "service-worker": "node bin/workbox-build.js && rollup -c etc/rollup.service-worker.js && rimraf tmp",
         "start": "node bin/server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "karma start --coverage"
     },
     "repository": {
         "type": "git",
@@ -23,6 +23,11 @@
     },
     "homepage": "https://github.com/anoblet/web-starter-kit#readme",
     "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-proposal-decorators": "^7.8.3",
+        "@babel/preset-typescript": "^7.8.3",
+        "@open-wc/testing": "^2.5.7",
+        "@open-wc/testing-karma": "^3.3.8",
         "@rollup/plugin-node-resolve": "^7.1.1",
         "@rollup/plugin-replace": "^2.3.1",
         "@rollup/plugin-typescript": "^3.0.0",
@@ -31,6 +36,8 @@
         "compression": "^1.7.4",
         "connect-history-api-fallback": "^1.6.0",
         "cz-conventional-changelog": "^3.1.0",
+        "deepmerge": "^4.2.2",
+        "karma": "^4.4.1",
         "npm-run-all": "^4.1.5",
         "rimraf": "^3.0.2",
         "rollup": "^1.31.1",
@@ -46,6 +53,7 @@
         }
     },
     "dependencies": {
+        "lit-element": "^2.3.0",
         "workbox-window": "^5.0.0"
     }
 }
