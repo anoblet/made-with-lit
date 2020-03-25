@@ -11,7 +11,8 @@ export class PageIndexComponent extends LitElement {
     constructor() {
         super();
         getCollection("items", {
-            callback: (items: any[]) => (this.items = items)
+            callback: (items: any[]) => (this.items = items),
+            orderBy: "created"
         });
     }
 

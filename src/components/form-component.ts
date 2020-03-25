@@ -1,11 +1,12 @@
 import { addDocument } from "@anoblet/firebase";
 import "@material/mwc-textfield";
+import { TextField } from "@material/mwc-textfield";
 import { css, customElement, html, LitElement, query } from "lit-element";
 
 @customElement("form-component")
 export class FormComponent extends LitElement {
-    @query("#title") title;
-    @query("#address") address;
+    @query("#title") titleField: TextField;
+    @query("#address") addressField: TextField;
 
     public static get styles() {
         return css`
@@ -30,8 +31,11 @@ export class FormComponent extends LitElement {
 
     addItem() {
         addDocument("items", {
-            title: this.title.value,
-            address: this.address.value
+            address: this.addressField.value,
+            created: Date.now(),
+            title: this.titleField.value
         });
+        this.addressField.value = "";
+        this.titleField.value = "";
     }
 }

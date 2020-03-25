@@ -27,6 +27,7 @@ export class ListItemComponent extends LitElement {
     async confirm() {
         await updateDocument(`items/${this.item.id}`, {
             address: this.address.value,
+            created: this.item.created || Date.now(),
             title: this.title.value
         });
         this.editable = false;
@@ -38,6 +39,10 @@ export class ListItemComponent extends LitElement {
 
     edit() {
         this.editable = true;
+    }
+
+    open() {
+        window.open(this.item.address, "_blank");
     }
 
     renderField(field: string) {
@@ -74,6 +79,19 @@ export class ListItemComponent extends LitElement {
             a {
                 text-decoration: none;
             }
+
+            mwc-textfield {
+                flex: 1;
+            }
+
+            .field {
+                /* height: max-content; */
+                padding: 0.5rem;
+            }
+
+            .link {
+                cursor: pointer;
+            }
         `;
     }
 
@@ -81,12 +99,9 @@ export class ListItemComponent extends LitElement {
         return html`
             ${!this.editable
                 ? html`
-                      <span>${this.item.title}</span>
-                      <!-- <span
-                          ><a href=${this.item.address}
-                              >${this.item.address}</a
-                          ></span
-                      > -->
+                      <span class="link" @click=${this.open}
+                          >${this.item.title}</span
+                      >
                       <mwc-button label="Edit" @click=${this.edit}></mwc-button>
                       <mwc-button
                           label="Delete"
@@ -94,14 +109,18 @@ export class ListItemComponent extends LitElement {
                       ></mwc-button>
                   `
                 : html`
-                      <mwc-textfield
-                          id="title"
-                          label="Title"
-                          value=${this.item.title}
-                      ></mwc-textfield>
+                      <span class="field">
+                          <mwc-textfield
+                              id="title"
+                              label="Title"
+                              outlined
+                              value=${this.item.title}
+                          ></mwc-textfield>
+                      </span>
                       <mwc-textfield
                           id="address"
                           label="Address"
+                          outlined
                           value=${this.item.address}
                       ></mwc-textfield>
                       <mwc-button
