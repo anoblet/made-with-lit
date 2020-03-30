@@ -5,8 +5,9 @@ import { css, customElement, html, LitElement, query } from "lit-element";
 
 @customElement("form-component")
 export class FormComponent extends LitElement {
+    @query("#organization") organizationField: TextField;
     @query("#title") titleField: TextField;
-    @query("#address") addressField: TextField;
+    @query("#url") urlField: TextField;
 
     public static get styles() {
         return css`
@@ -21,21 +22,24 @@ export class FormComponent extends LitElement {
         return html`
             <mwc-textfield id="title" label="Title" outlined></mwc-textfield>
             <mwc-textfield
-                id="address"
-                label="Address"
+                id="organization"
+                label="Organization"
                 outlined
             ></mwc-textfield>
+            <mwc-textfield id="url" label="URL" outlined></mwc-textfield>
             <mwc-button label="Add" raised @click=${this.addItem}></mwc-button>
         `;
     }
 
     addItem() {
         addDocument("items", {
-            address: this.addressField.value,
             created: Date.now(),
-            title: this.titleField.value
+            organization: this.organizationField.value,
+            title: this.titleField.value,
+            url: this.urlField.value
         });
-        this.addressField.value = "";
+        this.organizationField.value = "";
         this.titleField.value = "";
+        this.urlField.value = "";
     }
 }
