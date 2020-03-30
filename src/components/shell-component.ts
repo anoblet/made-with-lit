@@ -20,6 +20,10 @@ export class ShellComponent extends LitElement {
         return [
             sharedStyles,
             css`
+                :host {
+                    --mdc-theme-primary: #2196F3;
+                }
+
                 #page-container {
                     padding: 1.5rem;
                 }
