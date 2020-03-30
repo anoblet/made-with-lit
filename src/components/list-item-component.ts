@@ -62,6 +62,8 @@ export class ListItemComponent extends LitElement {
                 display: grid;
                 grid-gap: 1rem;
                 grid-template-columns: 1fr max-content max-content;
+                padding: 0 1rem;
+                border-radius: 0.25rem;
             }
 
             :host([editable]) {

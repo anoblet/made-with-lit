@@ -24,8 +24,13 @@ export class ListComponent extends LitElement {
                 display: grid;
                 grid-gap: 1rem;
             }
+
             a {
                 text-decoration: none;
+            }
+
+            list-item-component:hover {
+                background: #8FCDFF;
             }
 
             .item-address {
