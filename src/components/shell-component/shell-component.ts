@@ -4,7 +4,7 @@ import { customElement, html, LitElement } from "lit-element";
 export class ShellComponent extends LitElement {
     render() {
         return html`
-            <h1>My app</h1>
+            Test
         `;
     }
 }
