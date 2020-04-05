@@ -53,6 +53,7 @@
         }
     },
     "dependencies": {
+        "@victorycto/web-utilities": "git+https://github.com/VictoryCTO/vp-lib.git",
         "lit-element": "^2.3.0",
         "workbox-window": "^5.0.0"
     }
