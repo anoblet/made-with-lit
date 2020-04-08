@@ -21,13 +21,13 @@ export class ShellComponent extends LitElement {
             sharedStyles,
             css`
                 :host {
-                    --mdc-theme-primary: #2196F3;
+                    --mdc-theme-primary: hsla(200,80%,25%,1);
                 }
 
                 #page-container {
                     padding: 1.5rem;
                 }
-            `
+            `,
         ];
     }
 

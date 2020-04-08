@@ -29,8 +29,8 @@ export class ListComponent extends LitElement {
                 text-decoration: none;
             }
 
-            list-item-component:hover {
-                background: #8FCDFF;
+            list-item-component:not([editable]):hover {
+                background: hsla(200, 80%, 25%, 0.25);
             }
 
             .item-address {

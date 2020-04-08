@@ -23,6 +23,7 @@ const firebaseConfig = {
 })();
 
 let updateRequested = false;
+if (false)
 registerServiceWorker({
     installed: (event) => {
         if (event.isUpdate) {
