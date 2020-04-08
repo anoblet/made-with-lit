@@ -1,7 +1,7 @@
 import { initialize } from "@anoblet/firebase";
 import {
     showUpdateSnackbar,
-    registerServiceWorker
+    registerServiceWorker,
 } from "@victorycto/web-utilities";
 import "./components/shell-component";
 
@@ -13,7 +13,7 @@ const firebaseConfig = {
     storageBucket: "made-with-lit.appspot.com",
     messagingSenderId: "891139247807",
     appId: "1:891139247807:web:0fa0806b6b91a5e12ec00a",
-    measurementId: "G-6YVBT7NZMR"
+    measurementId: "G-6YVBT7NZMR",
 };
 
 (async () => {
@@ -23,18 +23,18 @@ const firebaseConfig = {
 })();
 
 let updateRequested = false;
-    registerServiceWorker({
-        installed: event => {
-            if (event.isUpdate) {
-                if (!updateRequested) showUpdateSnackbar();
-                updateRequested = true;
-            }
-        },
-        message: event => {
-            if (event.data.meta === "workbox-broadcast-update") {
-                if (!updateRequested) showUpdateSnackbar();
-                updateRequested = true;
-            }
-        },
-        source: "/service-worker.js"
-    });
+registerServiceWorker({
+    installed: (event) => {
+        if (event.isUpdate) {
+            if (!updateRequested) showUpdateSnackbar();
+            updateRequested = true;
+        }
+    },
+    message: (event) => {
+        if (event.data.meta === "workbox-broadcast-update") {
+            if (!updateRequested) showUpdateSnackbar();
+            updateRequested = true;
+        }
+    },
+    source: "/service-worker.js",
+});
