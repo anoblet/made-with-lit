@@ -5,6 +5,7 @@ import "@material/mwc-top-app-bar";
 import { css, customElement, html, LitElement, query } from "lit-element";
 import "../pages/page-index";
 import sharedStyles from "../shared-styles";
+import { github } from "../icons";
 
 @customElement("shell-component")
 export class ShellComponent extends LitElement {
@@ -21,7 +22,13 @@ export class ShellComponent extends LitElement {
             sharedStyles,
             css`
                 :host {
-                    --mdc-theme-primary: hsla(200,80%,25%,1);
+                    --mdc-theme-primary: hsla(200, 80%, 25%, 1);
+                }
+
+                #github {
+                    display: block;
+                    width: 36px;
+                    fill: #fff;
                 }
 
                 #page-container {
@@ -44,6 +51,13 @@ export class ShellComponent extends LitElement {
                 <div slot="appContent">
                     <mwc-top-app-bar>
                         <div slot="title">Made with lit</div>
+                        <a
+                            id="github"
+                            href="https://github.com/anoblet/made-with-lit"
+                            target="_blank"
+                            slot="actionItems"
+                            >${github}</a
+                        >
                     </mwc-top-app-bar>
                     <div id="page-container">
                         <page-index></page-index>

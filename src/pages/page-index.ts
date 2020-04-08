@@ -12,7 +12,7 @@ export class PageIndexComponent extends LitElement {
         super();
         getCollection("items", {
             callback: (items: any[]) => (this.items = items),
-            orderBy: "created"
+            orderBy: "created",
         });
     }
 
