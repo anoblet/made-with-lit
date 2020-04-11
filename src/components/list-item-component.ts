@@ -1,59 +1,62 @@
+import { deleteDocument, updateDocument } from "@anoblet/firebase";
+import "@material/mwc-icon";
+import "@material/mwc-icon-button";
+import "@material/mwc-list";
+import "@material/mwc-list/mwc-list-item";
 import {
     css,
     customElement,
     html,
     LitElement,
     property,
-    query
+    query,
 } from "lit-element";
-import "@material/mwc-list";
-import "@material/mwc-list/mwc-list-item";
-import "@material/mwc-icon-button";
-import "@material/mwc-icon";
-
-import { deleteDocument, updateDocument } from "@anoblet/firebase";
+import { render } from "lit-html";
 
 @customElement("list-item-component")
 export class ListItemComponent extends LitElement {
-    @property({ reflect: true, type: Boolean }) editable: any;
     @property({ type: Object }) item: any;
-    @query("#address") address;
-    @query("#title") title;
-
-    cancel() {
-        this.editable = false;
-    }
-
-    async confirm() {
-        await updateDocument(`items/${this.item.id}`, {
-            address: this.address.value,
-            created: this.item.created || Date.now(),
-            title: this.title.value
-        });
-        this.editable = false;
-    }
+    @query("#dialog-container") dialog;
+    @query("form-component") form: any;
+    dialogContainer;
 
     delete() {
         deleteDocument(`items/${this.item.id}`);
     }
 
     edit() {
-        this.editable = true;
+        this.dialogContainer = document.createElement("div");
+        this.dialogContainer.style.display = "contents";
+        render(
+            html`<mwc-dialog heading="Add a project" open
+                ><form-component
+                    organization=${this.item.organization}
+                    title=${this.item.title}
+                    url=${this.item.url}
+                ></form-component>
+                <mwc-button raised slot="primaryAction" dialogAction="save">
+                    Save
+                </mwc-button>
+            </mwc-dialog>`,
+            this.dialogContainer
+        );
+        this.dialogContainer
+            .querySelector("mwc-dialog")
+            .addEventListener("closed", (e: any) => {
+                if (e.detail.action === "save") {
+                    updateDocument(`items/${this.item.id}`, {
+                        organization: this.form.organizationField.value,
+                        title: this.form.titleField.value,
+                        url: this.form.urlField.value,
+                    });
+                }
+                this.renderRoot.removeChild(this.dialogContainer);
+            });
+        this.renderRoot.appendChild(this.dialogContainer);
     }
 
     open() {
         window.open(this.item.address, "_blank");
-    }
-
-    renderField(field: string) {
-        !this.editable
-            ? this.item[field]
-            : html`
-                  <mwc-textfield
-                      label=${field}
-                      value=${this.item[field]}
-                  ></mwc-textfield>
-              `;
     }
 
     public static get styles() {
@@ -82,6 +85,10 @@ export class ListItemComponent extends LitElement {
                 text-decoration: none;
             }
 
+            mwc-dialog {
+                display: contents;
+            }
+
             mwc-textfield {
                 flex: 1;
             }
@@ -99,41 +106,9 @@ export class ListItemComponent extends LitElement {
 
     public render() {
         return html`
-            ${!this.editable
-                ? html`
-                      <span class="link" @click=${this.open}
-                          >${this.item.title}</span
-                      >
-                      <mwc-button label="Edit" @click=${this.edit}></mwc-button>
-                      <mwc-button
-                          label="Delete"
-                          @click=${this.delete}
-                      ></mwc-button>
-                  `
-                : html`
-                      <span class="field">
-                          <mwc-textfield
-                              id="title"
-                              label="Title"
-                              outlined
-                              value=${this.item.title}
-                          ></mwc-textfield>
-                      </span>
-                      <mwc-textfield
-                          id="address"
-                          label="Address"
-                          outlined
-                          value=${this.item.address}
-                      ></mwc-textfield>
-                      <mwc-button
-                          label="Confirm"
-                          @click=${this.confirm}
-                      ></mwc-button>
-                      <mwc-button
-                          label="Cancel"
-                          @click=${this.cancel}
-                      ></mwc-button>
-                  `}
+            <span class="link" @click=${this.open}>${this.item.title}</span>
+            <mwc-button label="Edit" @click=${this.edit}></mwc-button>
+            <mwc-button label="Delete" @click=${this.delete}></mwc-button>
         `;
     }
 }

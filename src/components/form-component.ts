@@ -1,45 +1,70 @@
 import { addDocument } from "@anoblet/firebase";
 import "@material/mwc-textfield";
 import { TextField } from "@material/mwc-textfield";
-import { css, customElement, html, LitElement, query } from "lit-element";
+import {
+    css,
+    customElement,
+    html,
+    LitElement,
+    property,
+    query,
+} from "lit-element";
 
 @customElement("form-component")
 export class FormComponent extends LitElement {
+    @property({ type: String }) organization: string = "";
+    @property({ type: String }) title: string = "";
+    @property({ type: String }) url: string = "";
     @query("#organization") organizationField: TextField;
     @query("#title") titleField: TextField;
     @query("#url") urlField: TextField;
+
+    addItem() {
+        console.log(this.titleField);
+        addDocument("items", {
+            created: Date.now(),
+            organization: this.organizationField.value,
+            title: this.titleField.value,
+            url: this.urlField.value,
+        });
+        this.organizationField.value = "";
+        this.titleField.value = "";
+        this.urlField.value = "";
+    }
+
+    save = this.addItem;
 
     public static get styles() {
         return css`
             :host {
                 display: grid;
                 grid-gap: 1rem;
+                padding: 1rem 0 0 0;
+                box-sizing: border-box;
             }
         `;
     }
 
     public render() {
         return html`
-            <mwc-textfield id="title" label="Title" outlined></mwc-textfield>
+            <mwc-textfield
+                id="title"
+                label="Title"
+                outlined
+                value=${this.title}
+            ></mwc-textfield>
             <mwc-textfield
                 id="organization"
                 label="Organization"
                 outlined
+                value=${this.organization}
             ></mwc-textfield>
-            <mwc-textfield id="url" label="URL" outlined></mwc-textfield>
-            <mwc-button label="Add" raised @click=${this.addItem}></mwc-button>
+            <mwc-textfield
+                id="url"
+                label="URL"
+                outlined
+                value=${this.url}
+            ></mwc-textfield>
         `;
-    }
-
-    addItem() {
-        addDocument("items", {
-            created: Date.now(),
-            organization: this.organizationField.value,
-            title: this.titleField.value,
-            url: this.urlField.value
-        });
-        this.organizationField.value = "";
-        this.titleField.value = "";
-        this.urlField.value = "";
     }
 }
