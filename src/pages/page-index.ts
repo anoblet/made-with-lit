@@ -79,6 +79,7 @@ export class PageIndexComponent extends LitElement {
 
                 #container {
                     flex: 1;
+                    grid-template-rows: min-content auto;
                 }
 
                 #list {
