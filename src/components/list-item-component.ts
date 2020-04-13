@@ -56,7 +56,7 @@ export class ListItemComponent extends LitElement {
     }
 
     open() {
-        window.open(this.item.address, "_blank");
+        window.open(this.item.url, "_blank");
     }
 
     public static get styles() {
