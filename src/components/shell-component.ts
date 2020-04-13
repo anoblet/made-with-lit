@@ -46,8 +46,9 @@ export class ShellComponent extends LitElement {
 
                 #github {
                     display: block;
-                    width: 36px;
                     fill: #fff;
+                    margin-right: 20px;
+                    width: 36px;
                 }
 
                 #page-container {
