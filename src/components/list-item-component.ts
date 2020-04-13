@@ -18,7 +18,7 @@ export class ListItemComponent extends LitElement {
     @property({ type: Object }) item: any;
     @query("#dialog-container") dialog;
     @query("form-component") form: any;
-    dialogContainer;
+    dialogContainer: HTMLElement;
 
     delete() {
         deleteDocument(`items/${this.item.id}`);
@@ -44,15 +44,19 @@ export class ListItemComponent extends LitElement {
             .querySelector("mwc-dialog")
             .addEventListener("closed", (e: any) => {
                 if (e.detail.action === "save") {
-                    updateDocument(`items/${this.item.id}`, {
-                        organization: this.form.organizationField.value,
-                        title: this.form.titleField.value,
-                        url: this.form.urlField.value,
-                    });
+                    this.save();
                 }
                 this.renderRoot.removeChild(this.dialogContainer);
             });
         this.renderRoot.appendChild(this.dialogContainer);
+    }
+
+    save() {
+        updateDocument(`items/${this.item.id}`, {
+            organization: this.form.organizationField.value,
+            title: this.form.titleField.value,
+            url: this.form.urlField.value,
+        });
     }
 
     open() {
