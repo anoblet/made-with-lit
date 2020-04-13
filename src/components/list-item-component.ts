@@ -27,8 +27,14 @@ export class ListItemComponent extends LitElement {
     edit() {
         this.dialogContainer = document.createElement("div");
         this.dialogContainer.style.display = "contents";
+        const closed = (e: any) => {
+            if (e.detail.action === "save") {
+                this.save();
+            }
+            this.renderRoot.removeChild(this.dialogContainer);
+        };
         render(
-            html`<mwc-dialog heading="Add a project" open
+            html`<mwc-dialog @closed=${closed} heading="Add a project" open
                 ><form-component
                     organization=${this.item.organization}
                     title=${this.item.title}
@@ -40,14 +46,6 @@ export class ListItemComponent extends LitElement {
             </mwc-dialog>`,
             this.dialogContainer
         );
-        this.dialogContainer
-            .querySelector("mwc-dialog")
-            .addEventListener("closed", (e: any) => {
-                if (e.detail.action === "save") {
-                    this.save();
-                }
-                this.renderRoot.removeChild(this.dialogContainer);
-            });
         this.renderRoot.appendChild(this.dialogContainer);
     }
 
