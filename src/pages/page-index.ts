@@ -1,4 +1,6 @@
 import { getCollection } from "@anoblet/firebase";
+import "@material/mwc-button";
+import "@material/mwc-dialog";
 import {
     css,
     customElement,
@@ -9,35 +11,16 @@ import {
 } from "lit-element";
 import { render } from "lit-html";
 import "../components/form-component";
+import type { FormComponent } from "../components/form-component";
 import "../components/list-component";
+import type { Project } from "../models";
 import sharedStyles from "../shared-styles";
-import "@material/mwc-dialog";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
-    @property({ type: Array }) items = [];
-    @query("form-component") form: any;
-    dialogContainer;
-
-    open() {
-        this.dialogContainer = document.createElement("div");
-        render(
-            html`<mwc-dialog heading="Add a project" open
-                ><form-component></form-component>
-                <mwc-button raised slot="primaryAction" dialogAction="save">
-                    Save
-                </mwc-button>
-            </mwc-dialog>`,
-            this.dialogContainer
-        );
-        this.dialogContainer
-            .querySelector("mwc-dialog")
-            .addEventListener("closed", (e: any) => {
-                if (e.detail.action === "save") this.form.save();
-                this.renderRoot.removeChild(this.dialogContainer);
-            });
-        this.renderRoot.appendChild(this.dialogContainer);
-    }
+    @property({ type: Array }) items: Project[] = [];
+    @query("form-component") form: FormComponent;
+    dialogContainer: HTMLElement;
 
     constructor() {
         super();
@@ -102,5 +85,25 @@ export class PageIndexComponent extends LitElement {
                 </div>
             </div>
         `;
+    }
+
+    open() {
+        this.dialogContainer = document.createElement("div");
+        render(
+            html`<mwc-dialog heading="Add a project" open
+                ><form-component></form-component>
+                <mwc-button raised slot="primaryAction" dialogAction="save">
+                    Save
+                </mwc-button>
+            </mwc-dialog>`,
+            this.dialogContainer
+        );
+        this.dialogContainer
+            .querySelector("mwc-dialog")
+            .addEventListener("closed", (e: any) => {
+                if (e.detail.action === "save") this.form.save();
+                this.renderRoot.removeChild(this.dialogContainer);
+            });
+        this.renderRoot.appendChild(this.dialogContainer);
     }
 }
