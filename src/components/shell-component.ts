@@ -17,12 +17,31 @@ export class ShellComponent extends LitElement {
             : this.drawer.setAttribute("open", "");
     }
 
+    public firstUpdated() {
+        const style = css`
+            .mdc-drawer-app-content {
+                display: flex;
+            }
+        `;
+        applyStyle(this.drawer, style);
+    }
+
     public static get styles() {
         return [
             sharedStyles,
             css`
                 :host {
                     --mdc-theme-primary: hsla(200, 80%, 25%, 1);
+
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                }
+
+                [slot="appContent"] {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
                 }
 
                 #github {
@@ -32,6 +51,9 @@ export class ShellComponent extends LitElement {
                 }
 
                 #page-container {
+                    display: flex;
+                    flex: 1;
+                    overflow: auto;
                     padding: 1.5rem;
                 }
             `,
@@ -67,3 +89,18 @@ export class ShellComponent extends LitElement {
         `;
     }
 }
+
+/**
+ * Takes a node, CSSResult and appends it
+ */
+export const applyStyle = (node: LitElement, style) => {
+    if ("adoptedStyleSheets" in document) {
+        const shadowRoot: any = node.shadowRoot;
+        const sheets = shadowRoot.adoptedStyleSheets;
+        shadowRoot.adoptedStyleSheets = [...sheets, style.styleSheet];
+    } else {
+        const styleNode = document.createElement("style");
+        styleNode.textContent = style.cssText;
+        node.shadowRoot.appendChild(styleNode);
+    }
+};

@@ -52,9 +52,10 @@ export class PageIndexComponent extends LitElement {
         return [
             sharedStyles,
             css`
-                /* :host {
-                    --mdc-dialog-min-width: var(--mdc-dialog-max-width);
-                } */
+                :host {
+                    display: flex;
+                    flex: 1;
+                }
 
                 @media (min-width: 560px) {
                     :host {
@@ -75,19 +76,27 @@ export class PageIndexComponent extends LitElement {
                 mwc-dialog {
                     min-width: 50%;
                 }
+
+                #container {
+                    flex: 1;
+                }
+
+                #list {
+                    overflow: auto;
+                }
             `,
         ];
     }
 
     public render() {
         return html`
-            <div class="grid">
+            <div id="container" class="grid">
                 <mwc-button
                     @click=${this.open}
                     label="Add a project"
                     raised
                 ></mwc-button>
-                <div class="card">
+                <div id="list" class="card">
                     <list-component .items=${this.items}></list-component>
                 </div>
             </div>
