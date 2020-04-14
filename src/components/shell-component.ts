@@ -1,11 +1,11 @@
 import "@material/mwc-button";
 import "@material/mwc-drawer";
-import { Drawer } from "@material/mwc-drawer";
+import type { Drawer } from "@material/mwc-drawer";
 import "@material/mwc-top-app-bar";
 import { css, customElement, html, LitElement, query } from "lit-element";
+import { github } from "../icons";
 import "../pages/page-index";
 import sharedStyles from "../shared-styles";
-import { github } from "../icons";
 
 @customElement("shell-component")
 export class ShellComponent extends LitElement {
@@ -18,12 +18,14 @@ export class ShellComponent extends LitElement {
     }
 
     public firstUpdated() {
-        const style = css`
-            .mdc-drawer-app-content {
-                display: flex;
-            }
-        `;
-        applyStyle(this.drawer, style);
+        applyStyle(
+            this.drawer,
+            css`
+                .mdc-drawer-app-content {
+                    display: flex;
+                }
+            `
+        );
     }
 
     public static get styles() {
@@ -32,10 +34,9 @@ export class ShellComponent extends LitElement {
             css`
                 :host {
                     --mdc-theme-primary: hsla(200, 80%, 25%, 1);
-
                     display: flex;
-                    flex-direction: column;
                     flex: 1;
+                    flex-direction: column;
                 }
 
                 [slot="appContent"] {
