@@ -12,6 +12,8 @@ import {
 
 @customElement("form-component")
 export class FormComponent extends LitElement {
+    @property({ type: String }) author: string = "";
+    @property({ type: String }) github: string = "";
     @property({ type: String }) organization: string = "";
     @property({ type: String }) title: string = "";
     @property({ type: String }) url: string = "";
@@ -51,19 +53,21 @@ export class FormComponent extends LitElement {
                 id="title"
                 label="Title"
                 outlined
+                required
                 value=${this.title}
             ></mwc-textfield>
             <mwc-textfield
-                id="organization"
-                label="Organization"
+                id="url"
+                label="Project URL"
                 outlined
-                value=${this.organization}
+                required
+                value=${this.url}
             ></mwc-textfield>
             <mwc-textfield
-                id="url"
-                label="URL"
+                id="author"
+                label="Author"
                 outlined
-                value=${this.url}
+                value=${this.author}
             ></mwc-textfield>
         `;
     }

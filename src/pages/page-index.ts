@@ -12,7 +12,8 @@ import {
 import { render } from "lit-html";
 import "../components/form-component";
 import type { FormComponent } from "../components/form-component";
-import "../components/list-component";
+import "../components/grid-component";
+// import "../components/table-component";
 import type { Project } from "../models";
 import sharedStyles from "../shared-styles";
 
@@ -65,6 +66,11 @@ export class PageIndexComponent extends LitElement {
                     grid-template-rows: min-content auto;
                 }
 
+                #grid {
+                    display: grid;
+                    grid-template-columns: min-content auto min-content min-content;
+                }
+
                 #list {
                     overflow: auto;
                 }
@@ -80,8 +86,10 @@ export class PageIndexComponent extends LitElement {
                     label="Add a project"
                     raised
                 ></mwc-button>
-                <div id="list" class="card">
-                    <list-component .items=${this.items}></list-component>
+                <div class="card">
+                    <grid-component .items=${this.items}></grid-component>
+                    <!-- <table-component .items=${this
+                        .items}></table-component> -->
                 </div>
             </div>
         `;

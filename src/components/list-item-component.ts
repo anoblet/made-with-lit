@@ -66,7 +66,7 @@ export class ListItemComponent extends LitElement {
             :host {
                 display: grid;
                 grid-gap: 1rem;
-                grid-template-columns: 1fr max-content max-content;
+                grid-template-columns: 1fr 4fr max-content max-content;
                 padding: 0 1rem;
                 border-radius: 0.25rem;
             }
@@ -108,6 +108,7 @@ export class ListItemComponent extends LitElement {
 
     public render() {
         return html`
+            <span>${this.item.author || this.item.organization}</span>
             <span class="link" @click=${this.open}>${this.item.title}</span>
             <mwc-button label="Edit" @click=${this.edit}></mwc-button>
             <mwc-button label="Delete" @click=${this.delete}></mwc-button>
