@@ -1,4 +1,5 @@
 import { addDocument } from "@anoblet/firebase";
+import "@material/mwc-select";
 import "@material/mwc-textfield";
 import { TextField } from "@material/mwc-textfield";
 import {
@@ -69,6 +70,10 @@ export class FormComponent extends LitElement {
                 outlined
                 value=${this.author}
             ></mwc-textfield>
+            <mwc-select outlined label="Category">
+                <mwc-list-item value="0">Component</mwc-list-item>
+                <mwc-list-item value="1">Component Suite</mwc-list-item>
+            </mwc-select>
         `;
     }
 }

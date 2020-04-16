@@ -82,7 +82,7 @@ export class PageIndexComponent extends LitElement {
         return html`
             <div id="container" class="grid">
                 <mwc-button
-                    @click=${this.open}
+                    @click=${this.openDialog}
                     label="Add a project"
                     raised
                 ></mwc-button>
@@ -95,11 +95,13 @@ export class PageIndexComponent extends LitElement {
         `;
     }
 
-    open() {
+    openDialog() {
         this.dialogContainer = document.createElement("div");
         const closed = (e: any) => {
-            if (e.detail.action === "save") this.form.save();
-            this.renderRoot.removeChild(this.dialogContainer);
+            if (e.target.tagName === "MWC-DIALOG") {
+                if (e.detail && e.detail.action === "save") this.form.save();
+                this.renderRoot.removeChild(this.dialogContainer);
+            }
         };
         render(
             html`<mwc-dialog @closed=${closed} heading="Add a project" open
