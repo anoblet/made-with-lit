@@ -1,0 +1,16 @@
+{
+    "author": {
+        "label": "Author",
+        "inputType": "text"
+    },
+    "name": {
+        "label": "Name",
+        "inputType": "text",
+        "required": true
+    },
+    "url": {
+        "label": "URL",
+        "inputType": "url",
+        "required": true
+    }
+}

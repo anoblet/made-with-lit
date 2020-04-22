@@ -3,7 +3,7 @@ import {
     showUpdateSnackbar,
     registerServiceWorker,
 } from "@victorycto/web-utilities";
-import "./components/shell-component";
+import "./components/shell-component/component";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDCSnfESKV1uT3AmMS2e9VGA5LGXJBjXFI",
@@ -24,18 +24,18 @@ const firebaseConfig = {
 
 let updateRequested = false;
 if (false)
-registerServiceWorker({
-    installed: (event) => {
-        if (event.isUpdate) {
-            if (!updateRequested) showUpdateSnackbar();
-            updateRequested = true;
-        }
-    },
-    message: (event) => {
-        if (event.data.meta === "workbox-broadcast-update") {
-            if (!updateRequested) showUpdateSnackbar();
-            updateRequested = true;
-        }
-    },
-    source: "/service-worker.js",
-});
+    registerServiceWorker({
+        installed: (event) => {
+            if (event.isUpdate) {
+                if (!updateRequested) showUpdateSnackbar();
+                updateRequested = true;
+            }
+        },
+        message: (event) => {
+            if (event.data.meta === "workbox-broadcast-update") {
+                if (!updateRequested) showUpdateSnackbar();
+                updateRequested = true;
+            }
+        },
+        source: "/service-worker.js",
+    });
