@@ -4,7 +4,7 @@ import "@material/mwc-dialog";
 import { css, customElement, html, LitElement, property, query } from "lit-element";
 import { render } from "lit-html";
 import "../components/form-component/component";
-import type { FormComponent } from "../components/form-component";
+import type { FormComponent } from "../components/form-component/component";
 import "../components/grid-component/component";
 import type { Project } from "../models";
 import sharedStyles from "../shared-styles";
