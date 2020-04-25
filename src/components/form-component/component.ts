@@ -7,7 +7,6 @@ import { customElement, LitElement, property, query } from "lit-element";
 import sharedStyles from "../../shared-styles";
 import style from "./style.css";
 import template from "./template.html";
-import * as model from "../../models/project.json";
 
 const categories = [
     { label: "Component", value: "component" },
@@ -19,19 +18,12 @@ export class FormComponent extends LitElement {
     @property({ type: String }) author: string = "";
     @property({ type: String }) category: string = "";
     @property({ type: String }) github: string = "";
+    @property({ type: Object }) model: any = {};
     @property({ type: String }) organization: string = "";
     @property({ type: String }) title: string = "";
     @property({ type: String }) url: string = "";
 
-    model;
-
-    categories = [
-        { label: "Component", value: "component" },
-        { label: "Component Suite", value: "component_suite" },
-    ];
-
     addItem() {
-        console.log(this.category);
         addDocument("items", {
             author: this.author,
             category: this.category,
@@ -49,11 +41,13 @@ export class FormComponent extends LitElement {
 
     public render = template.bind(this);
 
-    categorySelected(event) {
-        this.category = categories[event.detail.index].label;
+    selectChanged(event) {
+        this[event.target.name] = this.model.fields.find(
+            (item) => item.name === this[event.target.name]
+        ).options[event.detail.index].value;
     }
 
-    textChange(event) {
-        this[event.target.id] = event.target.value;
+    textChanged(event) {
+        this[event.target.name] = event.target.value;
     }
 }

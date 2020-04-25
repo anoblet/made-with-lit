@@ -1,16 +1,20 @@
 {
-    "author": {
-        "label": "Author",
-        "inputType": "text"
-    },
-    "name": {
-        "label": "Name",
-        "inputType": "text",
-        "required": true
-    },
-    "url": {
-        "label": "URL",
-        "inputType": "url",
-        "required": true
-    }
+    "fields": [
+        {
+            "name": "author",
+            "label": "Author",
+            "inputType": "text"
+        },
+        {
+            "title": "title",
+            "label": "Title",
+            "inputType": "text",
+            "required": true
+        },
+        {
+            "label": "URL",
+            "inputType": "url",
+            "required": true
+        }
+    ]
 }

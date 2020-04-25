@@ -1,13 +1,21 @@
 import { getCollection } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
-import { css, customElement, html, LitElement, property, query } from "lit-element";
+import {
+    css,
+    customElement,
+    html,
+    LitElement,
+    property,
+    query,
+} from "lit-element";
 import { render } from "lit-html";
 import "../components/form-component/component";
 import type { FormComponent } from "../components/form-component/component";
 import "../components/grid-component/component";
 import type { Project } from "../models";
 import sharedStyles from "../shared-styles";
+import * as project from "../models/project.json";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
@@ -97,7 +105,7 @@ export class PageIndexComponent extends LitElement {
         };
         render(
             html`<mwc-dialog @closed=${closed} heading="Add a project" open
-                ><form-component></form-component>
+                ><form-component .model=${project}></form-component>
                 <mwc-button raised slot="primaryAction" dialogAction="save">
                     Save
                 </mwc-button>
