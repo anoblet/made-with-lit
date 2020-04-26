@@ -1,9 +1,14 @@
 import { html } from "lit-element";
 import * as project from "../../models/project.json";
 
-const getCategoryLabel = (category) => {
-    // project.fields.find((item) => category === item.)
-}
+const getCategoryLabel = (category: string) => {
+    return (
+        category &&
+        project.fields
+            .find((item) => item.name === "category")
+            .options.find((option) => option.value === category).label
+    );
+};
 
 export default function () {
     return html`<div class="header">
@@ -13,7 +18,7 @@ export default function () {
         ${this.items.map(
             (item, index) =>
                 html`<div class="row">
-                    <span>${item.category}</span>
+                    <span>${getCategoryLabel(item.category)}</span>
                     <span>${item.author || item.organization}</span
                     ><span
                         @click=${this.open}
