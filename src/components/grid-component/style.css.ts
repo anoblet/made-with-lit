@@ -4,7 +4,7 @@ export default css`
     :host {
         display: grid;
         grid-template-columns:
-            minmax(0, max-content) minmax(0, max-content)
+            minmax(0, max-content) minmax(0, max-content) minmax(0, max-content)
             auto minmax(0, max-content);
     }
 

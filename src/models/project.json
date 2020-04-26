@@ -2,24 +2,39 @@
     "collectionURI": "items",
     "fields": [
         {
+            "grid": {
+                "columnSortOrder": 0,
+                "width": "max-content"
+            },
             "name": "author",
             "label": "Author",
             "inputType": "text"
         },
         {
-            "name": "title",
-            "label": "Title",
+            "grid": {
+                "columnSortOrder": 1,
+                "width": "auto"
+            },
+            "name": "name",
+            "label": "Name",
             "inputType": "text",
             "required": true
         },
         {
-            "grid": {},
+            "grid": {
+                "columnSortOrder": 2,
+                "width": "max-content"
+            },
             "name": "url",
             "label": "URL",
             "inputType": "type",
             "required": true
         },
         {
+            "grid": {
+                "columnSortOrder": 3,
+                "width": "max-content"
+            },
             "name": "category",
             "label": "Category",
             "inputType": "select",

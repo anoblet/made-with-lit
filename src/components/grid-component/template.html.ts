@@ -10,18 +10,30 @@ const getCategoryLabel = (category: string) => {
     );
 };
 
-// export default function() {
+const sortColumns = (fields) => {
+    return fields.sort((a, b) =>
+        a.grid?.columnSortOrder > b.grid?.columnSortOrder ? 1 : -1
+    );
+};
 
-// }
+const sortedColumns = project.fields.sort((a, b) =>
+    a.grid?.columnSortOrder > b.grid?.columnSortOrder ? 1 : -1
+);
 
 export default function () {
     return html`<div class="header">
-            <span>Category</span> <span>Author</span><span>Title</span
-            ><span></span>
+            ${sortedColumns.map((field) =>
+                field.grid ? html`<span>${field.label}</span>` : false
+            )}<span></span>
         </div>
         ${this.items.map(
             (item, index) =>
                 html`<div class="row">
+                    ${sortedColumns.map((field) =>
+                        field.grid
+                            ? html`<span>${item[field.name]}</span>`
+                            : false
+                    )}
                     <span>${getCategoryLabel(item.category)}</span>
                     <span>${item.author || item.organization}</span
                     ><span
