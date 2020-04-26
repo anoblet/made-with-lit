@@ -2,7 +2,7 @@ import { html } from "lit-element";
 import * as project from "../../models/project.json";
 
 const getCategoryLabel = (category) => {
-
+    // project.fields.find((item) => category === item.)
 }
 
 export default function () {
