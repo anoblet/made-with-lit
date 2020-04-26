@@ -30,6 +30,7 @@
             "inputType": "url",
             "required": true
         },
+
         {
             "grid": {
                 "order": 3,
@@ -52,6 +53,15 @@
                     "value": "component_suite"
                 }
             ]
+        },
+        {
+            "grid": {
+                "order": 4,
+                "width": "max-content"
+            },
+            "name": "random",
+            "label": "Random Field",
+            "inputType": "text"
         }
     ]
 }

@@ -8,9 +8,7 @@ const getOptionLabel = (field, value) => {
 };
 
 const sortColumns = (fields) => {
-    return fields.sort((a, b) =>
-        a.grid?.order > b.grid?.order ? 1 : -1
-    );
+    return fields.sort((a, b) => (a.grid?.order > b.grid?.order ? 1 : -1));
 };
 
 const sortedColumns = project.fields.sort((a, b) =>
@@ -58,7 +56,15 @@ export default function () {
                             }
                         }
                     })}
-                    <span><mwc-button>Edit</mwc-button><mwc-button>Delete</mwc-button></span>
+                    <span
+                        ><mwc-button
+                            @click=${this.openEditDialog}
+                            data-index=${index}
+                            >Edit</mwc-button
+                        ><mwc-button @click=${this.delete} data-index=${index}
+                            >Delete</mwc-button
+                        ></span
+                    >
                 </div>`
         )}`;
 }
