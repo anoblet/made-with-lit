@@ -78,6 +78,10 @@ export class PageIndexComponent extends LitElement {
                 #list {
                     overflow: auto;
                 }
+
+                .card {
+                    overflow: auto;
+                }
             `,
         ];
     }

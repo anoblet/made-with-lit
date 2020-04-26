@@ -9,12 +9,12 @@ const getOptionLabel = (field, value) => {
 
 const sortColumns = (fields) => {
     return fields.sort((a, b) =>
-        a.grid?.columnSortOrder > b.grid?.columnSortOrder ? 1 : -1
+        a.grid?.order > b.grid?.order ? 1 : -1
     );
 };
 
 const sortedColumns = project.fields.sort((a, b) =>
-    a.grid?.columnSortOrder > b.grid?.columnSortOrder ? 1 : -1
+    a.grid?.order > b.grid?.order ? 1 : -1
 );
 
 let style = html``;

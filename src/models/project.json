@@ -3,7 +3,7 @@
     "fields": [
         {
             "grid": {
-                "columnSortOrder": 0,
+                "order": 0,
                 "width": "max-content"
             },
             "name": "author",
@@ -12,7 +12,7 @@
         },
         {
             "grid": {
-                "columnSortOrder": 1,
+                "order": 1,
                 "width": "auto"
             },
             "name": "name",
@@ -22,7 +22,7 @@
         },
         {
             "grid": {
-                "columnSortOrder": 2,
+                "order": 2,
                 "width": "max-content"
             },
             "name": "url",
@@ -32,7 +32,7 @@
         },
         {
             "grid": {
-                "columnSortOrder": 3,
+                "order": 3,
                 "width": "max-content"
             },
             "name": "category",
