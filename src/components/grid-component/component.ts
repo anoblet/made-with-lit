@@ -69,6 +69,7 @@ export class GridComponent extends LitElement {
 
     save(data) {
         updateDocument(`items/${data.id}`, data);
+        this.updateCollection();
     }
 
     async updateCollection({ orderBy = "" } = {}) {

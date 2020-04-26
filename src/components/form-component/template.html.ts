@@ -22,10 +22,13 @@ export default function () {
                     ?required=${field.required}
                     @selected=${this.selectChanged}
                 >
-                    ${field.options.map(
-                        (option) =>
-                            html`<mwc-list-item>${option.label}</mwc-list-item>`
-                    )}
+                    ${field.options.map((option) => {
+                        return html`<mwc-list-item
+                            ?selected=${this.data[field.name] === option.value}
+                            value=${option.value}
+                            >${option.label}</mwc-list-item
+                        >`;
+                    })}
                 </mwc-select>`;
                 break;
             }
