@@ -87,9 +87,7 @@ export class PageIndexComponent extends LitElement {
                     raised
                 ></mwc-button>
                 <div class="card">
-                    <grid-component .items=${this.items}></grid-component>
-                    <!-- <table-component .items=${this
-                        .items}></table-component> -->
+                    <grid-component .model=${project} order-by="created"></grid-component>
                 </div>
             </div>
         `;

@@ -1,4 +1,5 @@
 {
+    "collectionURI": "items",
     "fields": [
         {
             "name": "author",
@@ -22,6 +23,10 @@
             "label": "Category",
             "inputType": "select",
             "options": [
+                {
+                    "label": "Application",
+                    "value": "application"
+                },
                 {
                     "label": "Component",
                     "value": "component"

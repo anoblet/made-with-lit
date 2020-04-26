@@ -21,7 +21,7 @@ export default function () {
                     <span>${getCategoryLabel(item.category)}</span>
                     <span>${item.author || item.organization}</span
                     ><span
-                        @click=${this.open}
+                        @click=${this.openLink}
                         class="title"
                         data-url=${item.url}
                         >${item.title}</span
