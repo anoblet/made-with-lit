@@ -13,7 +13,7 @@ import { render } from "lit-html";
 import "../components/form-component/component";
 import type { FormComponent } from "../components/form-component/component";
 import "../components/grid-component/component";
-import type { Project } from "../models";
+import type { Project } from "../types";
 import sharedStyles from "../shared-styles";
 import * as project from "../models/project.json";
 
