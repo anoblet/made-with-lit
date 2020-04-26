@@ -4,10 +4,11 @@ import "@material/mwc-icon-button";
 import "@material/mwc-list";
 import "@material/mwc-list/mwc-list-item";
 import { customElement, LitElement, property, query } from "lit-element";
+import { html, render } from "lit-html";
+import * as project from "../../models/project.json";
 import sharedStyles from "../../shared-styles";
 import style from "./style.css";
 import template from "./template.html";
-import { html, render } from "lit-html";
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
@@ -42,7 +43,7 @@ export class GridComponent extends LitElement {
         };
         render(
             html`<mwc-dialog @closed=${closed} heading="Add a project" open
-                ><form-component .author=${item.author}></form-component>
+                ><form-component .data=${item} .model=${project}></form-component>
                 <mwc-button raised slot="primaryAction" dialogAction="save">
                     Save
                 </mwc-button>
