@@ -7,12 +7,13 @@ import "@material/mwc-icon";
 import "@material/mwc-icon-button";
 import "@material/mwc-list";
 import "@material/mwc-list/mwc-list-item";
-import { customElement, LitElement, property, query } from "lit-element";
+import { css, customElement, LitElement, property, query } from "lit-element";
 import { html, render } from "lit-html";
 import sharedStyles from "../../shared-styles";
 import style from "./style.css";
 import template from "./template.html";
 import { FormComponent } from "../form-component/component";
+const columns = css``;
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
@@ -28,7 +29,7 @@ export class GridComponent extends LitElement {
     }
 
     public static get styles() {
-        return [sharedStyles, style];
+        return [sharedStyles, style, css``];
     }
 
     public render = template.bind(this);

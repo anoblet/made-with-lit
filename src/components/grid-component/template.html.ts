@@ -20,11 +20,22 @@ const sortedColumns = project.fields.sort((a, b) =>
     a.grid?.columnSortOrder > b.grid?.columnSortOrder ? 1 : -1
 );
 
+let style = html``;
+
+project.fields.map((field) => {
+    style = html`${style} ${field.grid.width}`;
+});
+
 export default function () {
-    return html`<div class="header">
+    return html` <style>
+            :host {
+                grid-template-columns: ${style};
+            }
+        </style>
+        <div class="header">
             ${sortedColumns.map((field) =>
                 field.grid ? html`<span>${field.label}</span>` : false
-            )}<span></span>
+            )}
         </div>
         ${this.items.map(
             (item, index) =>
@@ -34,26 +45,6 @@ export default function () {
                             ? html`<span>${item[field.name]}</span>`
                             : false
                     )}
-                    <span>${getCategoryLabel(item.category)}</span>
-                    <span>${item.author || item.organization}</span
-                    ><span
-                        @click=${this.openLink}
-                        class="title"
-                        data-url=${item.url}
-                        >${item.title}</span
-                    >
-                    <span>
-                        <mwc-button
-                            data-index=${index}
-                            label="Edit"
-                            @click=${this.openEditDialog}
-                        ></mwc-button>
-                        <mwc-button
-                            data-index=${index}
-                            label="Delete"
-                            @click=${this.delete}
-                        ></mwc-button>
-                    </span>
                 </div>`
         )}`;
 }
