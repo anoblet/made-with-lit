@@ -32,6 +32,17 @@ export default function () {
                 </mwc-select>`;
                 break;
             }
+            case "url": {
+                return html`<mwc-textfield
+                    @change=${this.textChanged}
+                    label=${field.label}
+                    name=${field.name}
+                    outlined
+                    ?required=${field.required}
+                    value=${this.data[field.name] || ""}
+                ></mwc-textfield>`;
+                break;
+            }
         }
     })}`;
 }
