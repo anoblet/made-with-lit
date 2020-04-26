@@ -8,6 +8,7 @@
         "build:watch": "rollup -c etc/rollup.development.js -w",
         "commit": "git-cz",
         "dev": "npm-run-all -p build:watch start",
+        "publish": "npm run build && npm run service-worker && firebase deploy",
         "save": "git add . && git commit -m \"chore(app): save\"",
         "service-worker": "node bin/workbox-build.js && rollup -c etc/rollup.service-worker.js && rimraf tmp",
         "start": "node bin/server.js",
