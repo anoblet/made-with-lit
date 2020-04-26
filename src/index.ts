@@ -4,6 +4,7 @@ import {
     registerServiceWorker,
 } from "@victorycto/web-utilities";
 import "./components/shell-component/component";
+import * as settings from "../etc/settings.json";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDCSnfESKV1uT3AmMS2e9VGA5LGXJBjXFI",
@@ -22,20 +23,22 @@ const firebaseConfig = {
     document.body.appendChild(el);
 })();
 
-let updateRequested = false;
-if (false)
-    registerServiceWorker({
-        installed: (event) => {
-            if (event.isUpdate) {
-                if (!updateRequested) showUpdateSnackbar();
-                updateRequested = true;
-            }
-        },
-        message: (event) => {
-            if (event.data.meta === "workbox-broadcast-update") {
-                if (!updateRequested) showUpdateSnackbar();
-                updateRequested = true;
-            }
-        },
-        source: "/service-worker.js",
-    });
+if (settings.serviceWorker)
+    if (location.hostname !== "localhost") {
+        let updateRequested = false;
+        registerServiceWorker({
+            installed: (event) => {
+                if (event.isUpdate) {
+                    if (!updateRequested) showUpdateSnackbar();
+                    updateRequested = true;
+                }
+            },
+            message: (event) => {
+                if (event.data.meta === "workbox-broadcast-update") {
+                    if (!updateRequested) showUpdateSnackbar();
+                    updateRequested = true;
+                }
+            },
+            source: "/service-worker.js",
+        });
+    }
