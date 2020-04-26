@@ -1,7 +1,7 @@
 import { getCollection } from "@anoblet/firebase";
 import { css, customElement, html, LitElement, property } from "lit-element";
-import "../components/form-component";
-import "../components/list-component";
+// import "../components/form-component";
+// import "../components/list-component";
 import sharedStyles from "../shared-styles";
 
 @customElement("page-index")

@@ -2,7 +2,6 @@ import { addDocument } from "@anoblet/firebase";
 import "@material/mwc-list/mwc-list-item";
 import "@material/mwc-select";
 import "@material/mwc-textfield";
-import { TextField } from "@material/mwc-textfield";
 import { customElement, LitElement, property, query } from "lit-element";
 import sharedStyles from "../../shared-styles";
 import style from "./style.css";
@@ -23,6 +22,8 @@ export class FormComponent extends LitElement {
     @property({ type: String }) title: string = "";
     @property({ type: String }) url: string = "";
 
+    data: any = {};
+
     addItem() {
         addDocument("items", {
             author: this.author,
@@ -33,7 +34,14 @@ export class FormComponent extends LitElement {
         });
     }
 
-    save = this.addItem;
+    save() {
+        addDocument("items", {
+            ...this.data,
+            ...{
+                created: Date.now(),
+            },
+        });
+    }
 
     public static get styles() {
         return [sharedStyles, style];
@@ -42,12 +50,13 @@ export class FormComponent extends LitElement {
     public render = template.bind(this);
 
     selectChanged(event) {
-        this[event.target.name] = this.model.fields.find(
-            (item) => item.name === this[event.target.name]
+        const name = event.target.getAttribute("name");
+        this.data[name] = this.model.fields.find(
+            (item) => item.name === name
         ).options[event.detail.index].value;
     }
 
     textChanged(event) {
-        this[event.target.name] = event.target.value;
+        this.data[event.target.getAttribute("name")] = event.target.value;
     }
 }

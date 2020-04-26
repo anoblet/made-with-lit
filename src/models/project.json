@@ -6,15 +6,31 @@
             "inputType": "text"
         },
         {
-            "title": "title",
+            "name": "title",
             "label": "Title",
             "inputType": "text",
             "required": true
         },
         {
+            "name": "url",
             "label": "URL",
-            "inputType": "url",
+            "inputType": "type",
             "required": true
+        },
+        {
+            "name": "category",
+            "label": "Category",
+            "inputType": "select",
+            "options": [
+                {
+                    "label": "Component",
+                    "value": "component"
+                },
+                {
+                    "label": "Component Suite",
+                    "value": "component_suite"
+                }
+            ]
         }
     ]
 }

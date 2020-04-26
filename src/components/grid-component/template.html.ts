@@ -1,4 +1,9 @@
 import { html } from "lit-element";
+import * as project from "../../models/project.json";
+
+const getCategoryLabel = (category) => {
+
+}
 
 export default function () {
     return html`<div class="header">
