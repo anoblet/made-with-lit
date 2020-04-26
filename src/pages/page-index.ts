@@ -53,6 +53,10 @@ export class PageIndexComponent extends LitElement {
                     }
                 }
 
+                card-component {
+                    overflow: auto;
+                }
+
                 form-component {
                     width: 100%;
                 }

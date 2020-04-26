@@ -27,7 +27,7 @@
             },
             "name": "url",
             "label": "URL",
-            "inputType": "type",
+            "inputType": "url",
             "required": true
         },
         {
