@@ -17,19 +17,25 @@ export default css`
     .header > * {
         display: flex;
         justify-content: center;
+        overflow: hidden;
         padding: 0.25rem 1.5rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .row {
         display: contents;
         cursor: pointer;
+        overflow: hidden;
     }
 
     .row > * {
-        display: flex;
         align-items: center;
-        padding: 0.25rem 1rem;
+        display: flex;
         overflow: hidden;
+        padding: 0.25rem 1rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .row:hover > * {

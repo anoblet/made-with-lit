@@ -4,7 +4,7 @@
         {
             "grid": {
                 "order": 0,
-                "width": "max-content"
+                "width": "minmax(0, max-content)"
             },
             "name": "author",
             "label": "Author",
@@ -23,7 +23,7 @@
         {
             "grid": {
                 "order": 2,
-                "width": "max-content"
+                "width": "minmax(0, max-content)"
             },
             "name": "url",
             "label": "URL",
@@ -33,8 +33,8 @@
 
         {
             "grid": {
-                "order": 3,
-                "width": "max-content"
+                "order": 0,
+                "width": "minmax(0, max-content)"
             },
             "name": "category",
             "label": "Category",
@@ -53,15 +53,6 @@
                     "value": "component_suite"
                 }
             ]
-        },
-        {
-            "grid": {
-                "order": 4,
-                "width": "max-content"
-            },
-            "name": "random",
-            "label": "Random Field",
-            "inputType": "text"
         }
     ]
 }
