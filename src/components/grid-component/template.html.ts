@@ -32,7 +32,7 @@ export default function () {
                 field.grid ? html`<span>${field.label}</span>` : nothing
             )}<span></span>
         </div>
-        ${this.items.map(
+        ${this.data.map(
             (item, index) =>
                 html`<div class="row">
                     ${sortedColumns.map((field) => {

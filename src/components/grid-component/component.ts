@@ -17,7 +17,7 @@ const columns = css``;
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
-    @property({ type: Array }) items: any[] = [];
+    @property({ type: Array }) data: any[] = [];
     @property({ attribute: "order-by", type: String }) orderBy: string;
     @query("form-component") form: FormComponent;
 
@@ -35,7 +35,8 @@ export class GridComponent extends LitElement {
     public render = template.bind(this);
 
     delete({ target }) {
-        deleteDocument(`items/${this.items[target.dataset.index].id}`);
+        deleteDocument(`items/${this.data[target.dataset.index].id}`);
+        this.updateCollection();
     }
 
     openLink(e: any) {
@@ -43,13 +44,14 @@ export class GridComponent extends LitElement {
     }
 
     openEditDialog({ target }) {
-        const item = this.items[target.dataset.index];
+        const index = target.dataset.index;
+        const item = this.data[index];
 
         this.dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save")
-                    this.save(this.form.data);
+                    this.save(this.form.data, index);
                 this.renderRoot.removeChild(this.dialogContainer);
             }
         };
@@ -68,13 +70,15 @@ export class GridComponent extends LitElement {
         this.renderRoot.appendChild(this.dialogContainer);
     }
 
-    save(data) {
+    save(data, index) {
         updateDocument(`items/${data.id}`, data);
-        this.updateCollection();
+        const tmp = this.data;
+        tmp[index] = data;
+        this.data = tmp;
     }
 
     async updateCollection({ orderBy = "" } = {}) {
-        this.items = await getCollection(this.model.collectionURI, {
+        this.data = await getCollection(this.model.collectionURI, {
             orderBy: this.orderBy || orderBy,
         });
     }
