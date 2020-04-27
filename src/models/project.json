@@ -63,15 +63,5 @@
             "label": "Random Field",
             "inputType": "text"
         }
-        ,
-        {
-            "grid": {
-                "order": 5,
-                "width": "max-content"
-            },
-            "name": "pete",
-            "label": "Pete",
-            "inputType": "text"
-        }
     ]
 }

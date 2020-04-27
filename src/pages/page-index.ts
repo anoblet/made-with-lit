@@ -1,4 +1,4 @@
-import { getCollection } from "@anoblet/firebase";
+import { addDocument, getCollection } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
 import {
@@ -21,6 +21,7 @@ import * as project from "../models/project.json";
 export class PageIndexComponent extends LitElement {
     @property({ type: Array }) items: Project[] = [];
     @query("form-component") form: FormComponent;
+    @query("#grid") grid;
     dialogContainer: HTMLElement;
 
     constructor() {
@@ -70,11 +71,6 @@ export class PageIndexComponent extends LitElement {
                     grid-template-rows: min-content auto;
                 }
 
-                #grid {
-                    display: grid;
-                    grid-template-columns: min-content auto min-content min-content;
-                }
-
                 #list {
                     overflow: auto;
                 }
@@ -95,7 +91,11 @@ export class PageIndexComponent extends LitElement {
                     raised
                 ></mwc-button>
                 <div class="card">
-                    <grid-component .model=${project} order-by="created"></grid-component>
+                    <grid-component
+                        id="grid"
+                        .model=${project}
+                        order-by="created"
+                    ></grid-component>
                 </div>
             </div>
         `;
@@ -105,7 +105,7 @@ export class PageIndexComponent extends LitElement {
         this.dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
-                if (e.detail && e.detail.action === "save") this.form.save();
+                if (e.detail && e.detail.action === "save") this.save();
                 this.renderRoot.removeChild(this.dialogContainer);
             }
         };
@@ -119,5 +119,15 @@ export class PageIndexComponent extends LitElement {
             this.dialogContainer
         );
         this.renderRoot.appendChild(this.dialogContainer);
+    }
+
+    save() {
+        addDocument("items", {
+            ...this.form.data,
+            ...{
+                created: Date.now(),
+            },
+        });
+        this.grid.updateCollection();
     }
 }

@@ -13,15 +13,6 @@ export class FormComponent extends LitElement {
 
     data: any = {};
 
-    save() {
-        addDocument("items", {
-            ...this.data,
-            ...{
-                created: Date.now(),
-            },
-        });
-    }
-
     public static get styles() {
         return [sharedStyles, style];
     }
