@@ -13,15 +13,13 @@ import sharedStyles from "../../shared-styles";
 import style from "./style.css";
 import template from "./template.html";
 import { FormComponent } from "../form-component/component";
-const columns = css``;
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
-    @property({ type: Array }) data: any[] = [];
+    @property({ type: Array }) data = [];
     @property({ attribute: "order-by", type: String }) orderBy: string;
     @query("form-component") form: FormComponent;
 
-    dialogContainer: HTMLElement;
     model;
 
     firstUpdated() {
@@ -35,8 +33,10 @@ export class GridComponent extends LitElement {
     public render = template.bind(this);
 
     delete({ target }) {
-        deleteDocument(`items/${this.data[target.dataset.index].id}`);
-        this.updateCollection();
+        const index = target.dataset.index;
+        deleteDocument(`items/${this.data[index].id}`);
+        this.data.splice(index, 1);
+        this.data = [...this.data];
     }
 
     openLink(e: any) {
@@ -72,9 +72,8 @@ export class GridComponent extends LitElement {
 
     save(data, index) {
         updateDocument(`items/${data.id}`, data);
-        const tmp = this.data;
-        tmp[index] = data;
-        this.data = tmp;
+        this.data[index] = data;
+        this.data = [...this.data];
     }
 
     async updateCollection({ orderBy = "" } = {}) {
