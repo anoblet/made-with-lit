@@ -76,6 +76,12 @@ export class GridComponent extends LitElement {
         this.data = [...this.data];
     }
 
+    get sortedColumns() {
+        return this.model.fields.sort((a, b) =>
+            a.grid?.order > b.grid?.order ? 1 : -1
+        );
+    }
+
     async updateCollection({ orderBy = "" } = {}) {
         this.data = await getCollection(this.model.collectionURI, {
             orderBy: this.orderBy || orderBy,

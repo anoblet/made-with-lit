@@ -7,14 +7,6 @@ const getOptionLabel = (field, value) => {
     return field.options.find((option) => option.value === value).label;
 };
 
-const sortColumns = (fields) => {
-    return fields.sort((a, b) => (a.grid?.order > b.grid?.order ? 1 : -1));
-};
-
-const sortedColumns = project.fields.sort((a, b) =>
-    a.grid?.order > b.grid?.order ? 1 : -1
-);
-
 let style = html``;
 
 project.fields.map((field) => {
@@ -28,14 +20,14 @@ export default function () {
             }
         </style>
         <div class="header">
-            ${sortedColumns.map((field) =>
+            ${this.sortedColumns.map((field) =>
                 field.grid ? html`<span>${field.label}</span>` : nothing
             )}<span></span>
         </div>
         ${this.data.map(
             (item, index) =>
                 html`<div class="row">
-                    ${sortedColumns.map((field) => {
+                    ${this.sortedColumns.map((field) => {
                         switch (field.inputType) {
                             case "select": {
                                 return html`<span
