@@ -1,37 +1,19 @@
-import { addDocument, getCollection } from "@anoblet/firebase";
+import { addDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
-import {
-    css,
-    customElement,
-    html,
-    LitElement,
-    property,
-    query,
-} from "lit-element";
+import { css, customElement, html, LitElement, query } from "lit-element";
 import { render } from "lit-html";
 import "../components/form-component/component";
 import type { FormComponent } from "../components/form-component/component";
 import "../components/grid-component/component";
-import type { Project } from "../types";
-import sharedStyles from "../shared-styles";
 import * as project from "../models/project.json";
+import sharedStyles from "../shared-styles";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
-    @property({ type: Array }) items: Project[] = [];
     @query("form-component") form: FormComponent;
     @query("#grid") grid;
     dialogContainer: HTMLElement;
-
-    constructor() {
-        super();
-
-        getCollection("items", {
-            callback: (items: any[]) => (this.items = items),
-            orderBy: "created",
-        });
-    }
 
     public static get styles() {
         return [

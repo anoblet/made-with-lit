@@ -47,12 +47,12 @@ export class GridComponent extends LitElement {
         const index = target.dataset.index;
         const item = this.data[index];
 
-        this.dialogContainer = document.createElement("div");
+        const dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save")
                     this.save(this.form.data, index);
-                this.renderRoot.removeChild(this.dialogContainer);
+                this.renderRoot.removeChild(dialogContainer);
             }
         };
         render(
@@ -65,9 +65,9 @@ export class GridComponent extends LitElement {
                     Save
                 </mwc-button>
             </mwc-dialog>`,
-            this.dialogContainer
+            dialogContainer
         );
-        this.renderRoot.appendChild(this.dialogContainer);
+        this.renderRoot.appendChild(dialogContainer);
     }
 
     save(data, index) {
