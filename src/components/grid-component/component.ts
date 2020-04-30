@@ -23,21 +23,15 @@ export class GridComponent extends LitElement {
 
     model;
 
-    firstUpdated() {
-        this.updateCollection();
-    }
-
-    public static get styles() {
-        return [sharedStyles, style, css``];
-    }
-
-    public render = template.bind(this);
-
     delete({ target }) {
         const index = target.dataset.index;
         deleteDocument(`items/${this.data[index].id}`);
         this.data.splice(index, 1);
         this.data = [...this.data];
+    }
+
+    firstUpdated() {
+        this.updateCollection();
     }
 
     openLink(e: any) {
@@ -98,6 +92,10 @@ export class GridComponent extends LitElement {
         this.renderRoot.appendChild(dialogContainer);
     }
 
+    refresh() {}
+
+    public render = template.bind(this);
+
     save(data, index) {
         updateDocument(`items/${data.id}`, data);
         this.data[index] = data;
@@ -110,6 +108,10 @@ export class GridComponent extends LitElement {
                   a.grid?.order > b.grid?.order ? 1 : -1
               )
             : [];
+    }
+
+    public static get styles() {
+        return [sharedStyles, style, css``];
     }
 
     async updateCollection({ orderBy = "" } = {}) {
