@@ -9,6 +9,7 @@ export default css`
         border: 1px solid #000;
         border-radius: 0.25rem;
         padding: 1.5rem;
+        position: relative;
         word-break: break-all;
     }
 

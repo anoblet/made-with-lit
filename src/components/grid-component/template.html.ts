@@ -1,6 +1,7 @@
 import { html } from "lit-element";
 import { nothing } from "lit-html";
 import * as project from "../../models/project.json";
+import "@material/mwc-fab";
 
 const getOptionLabel = (field, value) => {
     if (!field || !value) return nothing;
@@ -58,5 +59,6 @@ export default function () {
                         ></span
                     >
                 </div>`
-        )}`;
+        )}
+        <div id="fab"><mwc-fab icon="add" @click=${this.openAddDialog}></mwc-fab></div>`;
 }

@@ -1,4 +1,5 @@
 import {
+    addDocument,
     deleteDocument,
     getCollection,
     updateDocument,
@@ -41,6 +42,33 @@ export class GridComponent extends LitElement {
 
     openLink(e: any) {
         window.open(e.target.dataset.url, "_blank");
+    }
+
+    openAddDialog() {
+        const dialogContainer = document.createElement("div");
+        const closed = (e: any) => {
+            if (e.target.tagName === "MWC-DIALOG") {
+                if (e.detail && e.detail.action === "save") {
+                    addDocument("items", {
+                        ...this.form.data,
+                        ...{
+                            created: Date.now(),
+                        },
+                    });
+                }
+                this.renderRoot.removeChild(dialogContainer);
+            }
+        };
+        render(
+            html`<mwc-dialog @closed=${closed} heading="Add a project" open
+                ><form-component .model=${this.model}></form-component>
+                <mwc-button raised slot="primaryAction" dialogAction="save">
+                    Save
+                </mwc-button>
+            </mwc-dialog>`,
+            dialogContainer
+        );
+        this.renderRoot.appendChild(dialogContainer);
     }
 
     openEditDialog({ target }) {

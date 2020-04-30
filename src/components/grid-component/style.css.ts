@@ -9,6 +9,12 @@ export default css`
         text-decoration: none;
     }
 
+    #fab {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
     .header {
         display: contents;
         font-weight: bold;
