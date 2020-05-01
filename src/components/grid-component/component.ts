@@ -51,12 +51,7 @@ export class GridComponent extends LitElement {
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save")
-                    addDocument("items", {
-                        ...this.form.data,
-                        ...{
-                            created: Date.now(),
-                        },
-                    });
+                    this.addItem(this.form.data);
                 this.renderRoot.removeChild(dialogContainer);
             }
         };
