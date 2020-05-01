@@ -8,16 +8,16 @@ const getOptionLabel = (field, value) => {
     return field.options.find((option) => option.value === value).label;
 };
 
-let style = html``;
-
+let style = ``;
 project.fields.map((field) => {
-    style = html`${style} ${field.grid.width}`;
+    style = `${style} ${field.grid.width}`;
 });
+style = `${style} max-content`;
 
 export default function () {
-    return html` <style>
+    return html`<style>
             :host {
-                grid-template-columns: ${style} max-content;
+                grid-template-columns: ${style};
             }
         </style>
         <div class="header">
