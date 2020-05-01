@@ -1,4 +1,4 @@
-import { addDocument } from "@anoblet/firebase";
+import { addDocument, updateDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
 import { customElement, html, LitElement, query } from "lit-element";
@@ -26,7 +26,9 @@ export class PageIndexComponent extends LitElement {
         const dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
-                if (e.detail && e.detail.action === "save") this.save();
+                if (e.detail && e.detail.action === "save") {
+                    // this.save();
+                }
                 this.renderRoot.removeChild(dialogContainer);
             }
         };
@@ -42,13 +44,18 @@ export class PageIndexComponent extends LitElement {
         this.renderRoot.appendChild(dialogContainer);
     }
 
-    save() {
+    addProject(event) {
+        const data = event.detail.data;
         addDocument("items", {
-            ...this.form.data,
+            ...data,
             ...{
                 created: Date.now(),
             },
         });
-        this.grid.updateCollection();
+    }
+
+    updateProject(event) {
+        const data = event.detail.data;
+        updateDocument(`items/${data.id}`, data);
     }
 }

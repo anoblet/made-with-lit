@@ -4,6 +4,7 @@ import {
     getCollection,
     updateDocument,
 } from "@anoblet/firebase";
+import * as firebase from "@anoblet/firebase";
 import "@material/mwc-icon";
 import "@material/mwc-icon-button";
 import "@material/mwc-list";
@@ -18,19 +19,26 @@ import { FormComponent } from "../form-component/component";
 @customElement("grid-component")
 export class GridComponent extends LitElement {
     @property({ type: Array }) data = [];
-    @property({ attribute: "order-by", type: String }) orderBy: string;
-    @query("form-component") form: FormComponent;
+    model: any;
+    sortedColumns = [];
 
-    model;
+    @property({ attribute: "order-by", type: String }) orderBy: string;
+
+    @query("form-component") form: FormComponent;
 
     delete({ target }) {
         const index = target.dataset.index;
-        deleteDocument(`items/${this.data[index].id}`);
+        firebase.deleteDocument(`items/${this.data[index].id}`);
         this.data.splice(index, 1);
         this.data = [...this.data];
     }
 
     firstUpdated() {
+        this.sortedColumns = this.model
+            ? this.model.fields.sort((a, b) =>
+                  a.grid?.order > b.grid?.order ? 1 : -1
+              )
+            : [];
         this.updateCollection();
     }
 
@@ -42,14 +50,13 @@ export class GridComponent extends LitElement {
         const dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
-                if (e.detail && e.detail.action === "save") {
+                if (e.detail && e.detail.action === "save")
                     addDocument("items", {
                         ...this.form.data,
                         ...{
                             created: Date.now(),
                         },
                     });
-                }
                 this.renderRoot.removeChild(dialogContainer);
             }
         };
@@ -65,7 +72,7 @@ export class GridComponent extends LitElement {
         this.renderRoot.appendChild(dialogContainer);
     }
 
-    openEditDialog({ target }) {
+    openUpdateDialog({ target }) {
         const index = target.dataset.index;
         const item = this.data[index];
 
@@ -73,7 +80,7 @@ export class GridComponent extends LitElement {
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save")
-                    this.save(this.form.data, index);
+                    this.updateItem(this.form.data, index);
                 this.renderRoot.removeChild(dialogContainer);
             }
         };
@@ -96,18 +103,17 @@ export class GridComponent extends LitElement {
 
     public render = template.bind(this);
 
-    save(data, index) {
-        updateDocument(`items/${data.id}`, data);
-        this.data[index] = data;
-        this.data = [...this.data];
+    addItem(data: any) {
+        this.data = [...this.data, data];
+        this.dispatchEvent(new CustomEvent("item-added", { detail: { data } }));
     }
 
-    get sortedColumns() {
-        return this.model
-            ? this.model.fields.sort((a, b) =>
-                  a.grid?.order > b.grid?.order ? 1 : -1
-              )
-            : [];
+    updateItem(data: any, index: string) {
+        this.data[index] = data;
+        this.data = [...this.data];
+        this.dispatchEvent(
+            new CustomEvent("item-updated", { detail: { data } })
+        );
     }
 
     public static get styles() {

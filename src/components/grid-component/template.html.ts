@@ -51,7 +51,7 @@ export default function () {
                     })}
                     <span
                         ><mwc-button
-                            @click=${this.openEditDialog}
+                            @click=${this.openUpdateDialog}
                             data-index=${index}
                             >Edit</mwc-button
                         ><mwc-button @click=${this.delete} data-index=${index}
@@ -60,5 +60,7 @@ export default function () {
                     >
                 </div>`
         )}
-        <div id="fab"><mwc-fab icon="add" @click=${this.openAddDialog}></mwc-fab></div>`;
+        <div id="fab">
+            <mwc-fab icon="add" @click=${this.openAddDialog}></mwc-fab>
+        </div>`;
 }
