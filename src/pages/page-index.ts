@@ -22,28 +22,6 @@ export class PageIndexComponent extends LitElement {
 
     public render = template.bind(this);
 
-    openDialog() {
-        const dialogContainer = document.createElement("div");
-        const closed = (e: any) => {
-            if (e.target.tagName === "MWC-DIALOG") {
-                if (e.detail && e.detail.action === "save") {
-                    // this.save();
-                }
-                this.renderRoot.removeChild(dialogContainer);
-            }
-        };
-        render(
-            html`<mwc-dialog @closed=${closed} heading="Add a project" open
-                ><form-component .model=${project}></form-component>
-                <mwc-button raised slot="primaryAction" dialogAction="save">
-                    Save
-                </mwc-button>
-            </mwc-dialog>`,
-            dialogContainer
-        );
-        this.renderRoot.appendChild(dialogContainer);
-    }
-
     addProject(event) {
         const data = event.detail.data;
         addDocument("items", {
