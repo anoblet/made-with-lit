@@ -1,15 +1,12 @@
 import { addDocument, updateDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
-import { customElement, html, LitElement, query } from "lit-element";
-import "../components/form-component/component";
-import type { FormComponent } from "../components/form-component/component";
-import type { GridComponent } from "../components/grid-component/component";
+import { customElement, LitElement, query } from "lit-element";
 import "../components/grid-component/component";
-import * as project from "../models/project.json";
+import type { GridComponent } from "../components/grid-component/component";
 import sharedStyles from "../shared-styles";
-import template from "./page-index/template.html";
 import style from "./page-index/style.css";
+import template from "./page-index/template.html";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
@@ -21,7 +18,7 @@ export class PageIndexComponent extends LitElement {
 
     public render = template.bind(this);
 
-    addProject(event) {
+    addProject(event: CustomEvent) {
         const data = event.detail.data;
         addDocument("items", {
             ...data,
@@ -31,7 +28,7 @@ export class PageIndexComponent extends LitElement {
         });
     }
 
-    updateProject(event) {
+    updateProject(event: CustomEvent) {
         const data = event.detail.data;
         updateDocument(`items/${data.id}`, data);
     }
