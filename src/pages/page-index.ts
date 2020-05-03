@@ -2,9 +2,9 @@ import { addDocument, updateDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
 import { customElement, html, LitElement, query } from "lit-element";
-import { render } from "lit-html";
 import "../components/form-component/component";
 import type { FormComponent } from "../components/form-component/component";
+import type { GridComponent } from "../components/grid-component/component";
 import "../components/grid-component/component";
 import * as project from "../models/project.json";
 import sharedStyles from "../shared-styles";
@@ -13,8 +13,7 @@ import style from "./page-index/style.css";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
-    @query("form-component") form: FormComponent;
-    @query("#grid") grid;
+    @query("grid-component") grid: GridComponent;
 
     public static get styles() {
         return [sharedStyles, style];
