@@ -15,14 +15,15 @@ import sharedStyles from "../../shared-styles";
 import style from "./style.css";
 import template from "./template.html";
 import { FormComponent } from "../form-component/component";
+import { Collection } from "@anoblet/firebase";
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
+    collection: Collection;
     @property({ type: Array }) data = [];
     model: any;
-    sortedColumns = [];
-
     @property({ attribute: "order-by", type: String }) orderBy: string;
+    sortedColumns = [];
 
     @query("form-component") form: FormComponent;
 
@@ -39,7 +40,7 @@ export class GridComponent extends LitElement {
                   a.grid?.order > b.grid?.order ? 1 : -1
               )
             : [];
-        this.updateCollection();
+        this.collection.subscribe((data) => (this.data = data));
     }
 
     openLink(e: any) {
@@ -99,6 +100,7 @@ export class GridComponent extends LitElement {
     public render = template.bind(this);
 
     addItem(data: any) {
+        this.collection.add(data);
         this.data = [...this.data, data];
         this.dispatchEvent(new CustomEvent("item-added", { detail: { data } }));
     }
