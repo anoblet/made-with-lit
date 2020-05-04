@@ -13,6 +13,7 @@ export default function () {
                 <grid-component
                     @item-added=${this.addProject}
                     @item-updated=${this.updateProject}
+                    .collection=${this.collection}
                     .model=${project}
                     order-by="created"
                 ></grid-component>
