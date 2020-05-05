@@ -15,6 +15,7 @@ project.fields.map((field) => {
 style = `${style} max-content`;
 
 export default function () {
+    console.log(this.data);
     return html`<style>
             :host {
                 grid-template-columns: ${style};
@@ -51,7 +52,7 @@ export default function () {
                     })}
                     <span
                         ><mwc-button
-                            @click=${this.openUpdateDialog}
+                            @click=${this.updateItem}
                             data-index=${index}
                             >Edit</mwc-button
                         ><mwc-button @click=${this.delete} data-index=${index}
@@ -61,6 +62,6 @@ export default function () {
                 </div>`
         )}
         <div id="fab">
-            <mwc-fab icon="add" @click=${this.openAddDialog}></mwc-fab>
+            <mwc-fab icon="add" @click=${this.addItem}></mwc-fab>
         </div>`;
 }
