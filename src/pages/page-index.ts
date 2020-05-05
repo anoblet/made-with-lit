@@ -1,8 +1,9 @@
 import { Collection, updateDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
-import { customElement, html, LitElement, query, property } from "lit-element";
+import { customElement, html, LitElement, property, query } from "lit-element";
 import { render } from "lit-html";
+import { ProjectCollection } from "../collections";
 import { FormComponent } from "../components/form-component/component";
 import "../components/grid-component/component";
 import type { GridComponent } from "../components/grid-component/component";
@@ -17,7 +18,7 @@ export class PageIndexComponent extends LitElement {
     @query("grid-component") grid: GridComponent;
     @query("form-component") form: FormComponent;
 
-    collection: Collection;
+    collection: Collection = ProjectCollection;
 
     public static get styles() {
         return [sharedStyles, style];
@@ -27,7 +28,6 @@ export class PageIndexComponent extends LitElement {
 
     constructor() {
         super();
-        this.collection = new Collection("items");
         this.collection.subscribe((data) => (this.data = data));
     }
 
