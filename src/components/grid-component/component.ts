@@ -1,10 +1,5 @@
-import {
-    addDocument,
-    deleteDocument,
-    getCollection,
-    updateDocument,
-} from "@anoblet/firebase";
 import * as firebase from "@anoblet/firebase";
+import { Collection, getCollection } from "@anoblet/firebase";
 import "@material/mwc-icon";
 import "@material/mwc-icon-button";
 import "@material/mwc-list";
@@ -12,10 +7,10 @@ import "@material/mwc-list/mwc-list-item";
 import { css, customElement, LitElement, property, query } from "lit-element";
 import { html, render } from "lit-html";
 import sharedStyles from "../../shared-styles";
+import "../form-component/component";
+import { FormComponent } from "../form-component/component";
 import style from "./style.css";
 import template from "./template.html";
-import { FormComponent } from "../form-component/component";
-import { Collection } from "@anoblet/firebase";
 
 @customElement("grid-component")
 export class GridComponent extends LitElement {
