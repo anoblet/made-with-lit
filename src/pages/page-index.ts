@@ -46,12 +46,13 @@ export class PageIndexComponent extends LitElement {
         updateDocument(`items/${data.id}`, data);
     }
 
-    openAddDialog() {
+    addItem() {
         const dialogContainer = document.createElement("div");
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
-                if (e.detail && e.detail.action === "save")
+                if (e.detail && e.detail.action === "save") {
                     this.collection.add(this.form.data);
+                }
                 this.renderRoot.removeChild(dialogContainer);
             }
         };
@@ -67,7 +68,7 @@ export class PageIndexComponent extends LitElement {
         this.renderRoot.appendChild(dialogContainer);
     }
 
-    openUpdateDialog({ target }) {
+    editItem({ target }) {
         const index = target.dataset.index;
         const item = this.collection.data[index];
 
@@ -75,7 +76,8 @@ export class PageIndexComponent extends LitElement {
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save")
-                    this.renderRoot.removeChild(dialogContainer);
+                    updateDocument(`items/${item.id}`, item);
+                this.renderRoot.removeChild(dialogContainer);
             }
         };
         render(

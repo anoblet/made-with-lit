@@ -51,7 +51,7 @@ export default function () {
                     })}
                     <span
                         ><mwc-button
-                            @click=${this.updateItem}
+                            @click=${this.editItem}
                             data-index=${index}
                             >Edit</mwc-button
                         ><mwc-button @click=${this.delete} data-index=${index}

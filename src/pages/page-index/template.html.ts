@@ -11,11 +11,11 @@ export default function () {
             ></mwc-button>
             <div class="card">
                 <grid-component
-                    .addItem=${this.openAddDialog}
+                    .addItem=${this.addItem.bind(this)}
                     .data=${this.data}
+                    .editItem=${this.editItem.bind(this)}
                     .model=${project}
                     order-by="created"
-                    .updateItem=${this.openUpdateDialog}
                 ></grid-component>
             </div>
         </div>
