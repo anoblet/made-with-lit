@@ -15,7 +15,6 @@ project.fields.map((field) => {
 style = `${style} max-content`;
 
 export default function () {
-    console.log(this.data);
     return html`<style>
             :host {
                 grid-template-columns: ${style};

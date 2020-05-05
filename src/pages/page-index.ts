@@ -28,11 +28,7 @@ export class PageIndexComponent extends LitElement {
     constructor() {
         super();
         this.collection = new Collection("items");
-        this.collection.subscribe((data) => {
-            console.log(data);
-            this.data = data;
-        });
-        console.log(this.collection);
+        this.collection.subscribe((data) => (this.data = data));
     }
 
     addProject(event: CustomEvent) {
