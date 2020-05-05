@@ -1,5 +1,5 @@
 import * as firebase from "@anoblet/firebase";
-import { Collection, getCollection } from "@anoblet/firebase";
+import { Collection } from "@anoblet/firebase";
 import "@material/mwc-icon";
 import "@material/mwc-icon-button";
 import "@material/mwc-list";
@@ -76,7 +76,7 @@ export class GridComponent extends LitElement {
             }
         };
         render(
-            html`<mwc-dialog @closed=${closed} heading="Add a project" open
+            html`<mwc-dialog @closed=${closed} heading="Update a project" open
                 ><form-component
                     .data=${item}
                     .model=${this.model}
@@ -112,13 +112,7 @@ export class GridComponent extends LitElement {
         return [sharedStyles, style, css``];
     }
 
-    async updateCollection({ orderBy = "" } = {}) {
-        this.data = await getCollection(this.model.collectionURI, {
-            orderBy: this.orderBy || orderBy,
-        });
-    }
-
     updated(changedProperties) {
-        changedProperties.has("orderBy") && this.updateCollection();
+        // changedProperties.has("orderBy") && this.updateCollection();
     }
 }
