@@ -55,7 +55,7 @@
     },
     "dependencies": {
         "@anoblet/firebase": "git+https://github.com/anoblet/firebase.git",
-        "@material/mwc-button": "^0.14.1",
+        "@material/mwc-button": "^0.15.0",
         "@material/mwc-drawer": "^0.14.1",
         "@material/mwc-icon-button": "^0.14.1",
         "@material/mwc-list": "^0.14.1",
