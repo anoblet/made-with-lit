@@ -32,9 +32,8 @@ export class PageIndexComponent extends LitElement {
     }
 
     addProject(event: CustomEvent) {
-        const data = event.detail.data;
         this.collection.add({
-            ...data,
+            ...event.detail.data,
             ...{
                 created: Date.now(),
             },
