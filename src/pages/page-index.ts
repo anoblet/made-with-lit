@@ -50,8 +50,7 @@ export class PageIndexComponent extends LitElement {
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save") {
-                    console.log(this.form.data);
-                    this.collection.add({
+                    this.collection.add({ 
                         ...this.form.data,
                         ...{
                             created: Date.now(),
