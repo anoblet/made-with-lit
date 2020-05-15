@@ -1,5 +1,4 @@
 import * as firebase from "@anoblet/firebase";
-import { Collection } from "@anoblet/firebase";
 import "@material/mwc-icon";
 import "@material/mwc-icon-button";
 import "@material/mwc-list";
@@ -22,7 +21,7 @@ export class GridComponent extends LitElement {
     @query("form-component") form: FormComponent;
 
     public static get styles() {
-        return [sharedStyles, style, css``];
+        return [sharedStyles, style];
     }
 
     public render = template.bind(this);

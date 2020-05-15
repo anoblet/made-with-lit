@@ -1,3 +1,4 @@
+import * as firebase from "@anoblet/firebase";
 import { Collection, updateDocument } from "@anoblet/firebase";
 import "@material/mwc-button";
 import "@material/mwc-dialog";
@@ -40,6 +41,13 @@ export class PageIndexComponent extends LitElement {
         });
     }
 
+    delete({ target }) {
+        const index = target.dataset.index;
+        firebase.deleteDocument(`items/${this.data[index].id}`);
+        // this.data.splice(index, 1);
+        // this.data = [...this.data];
+    }
+
     updateProject(event: CustomEvent) {
         const data = event.detail.data;
         updateDocument(`items/${data.id}`, data);
@@ -50,7 +58,7 @@ export class PageIndexComponent extends LitElement {
         const closed = (e: any) => {
             if (e.target.tagName === "MWC-DIALOG") {
                 if (e.detail && e.detail.action === "save") {
-                    this.collection.add({ 
+                    this.collection.add({
                         ...this.form.data,
                         ...{
                             created: Date.now(),

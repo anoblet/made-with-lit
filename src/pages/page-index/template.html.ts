@@ -13,6 +13,7 @@ export default function () {
                 <grid-component
                     .addItem=${this.addItem.bind(this)}
                     .data=${this.data}
+                    .delete=${this.delete}
                     .editItem=${this.editItem.bind(this)}
                     .model=${project}
                     order-by="created"
