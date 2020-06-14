@@ -55,13 +55,13 @@
     },
     "dependencies": {
         "@anoblet/firebase": "git+https://github.com/anoblet/firebase.git",
-        "@material/mwc-button": "^0.14.1",
+        "@material/mwc-button": "^0.15.0",
         "@material/mwc-drawer": "^0.14.1",
         "@material/mwc-icon-button": "^0.15.0",
         "@material/mwc-list": "^0.14.1",
         "@material/mwc-menu": "^0.15.0",
-        "@material/mwc-snackbar": "^0.14.1",
-        "@material/mwc-textfield": "^0.14.1",
+        "@material/mwc-snackbar": "^0.15.0",
+        "@material/mwc-textfield": "^0.15.0",
         "@material/mwc-top-app-bar": "^0.14.1",
         "@victorycto/web-utilities": "git+https://github.com/VictoryCTO/vp-lib.git",
         "lit-element": "^2.3.1"
