@@ -33,6 +33,7 @@ export default css`
     #container {
         flex: 1;
         grid-template-rows: min-content auto;
+        height: 100%;
     }
 
     #list {
