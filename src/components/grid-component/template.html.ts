@@ -22,7 +22,7 @@ export default function () {
         </style>
         <div class="header">
             ${this.sortedColumns.map((field) =>
-                field.grid ? html`<span>${field.label}</span>` : nothing
+                field.grid ? html`<mwc-button disabled>${field.label}</mwc-button>` : nothing
             )}<span></span>
         </div>
         ${this.data.map(
