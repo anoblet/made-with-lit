@@ -12,7 +12,7 @@ export default css`
     #fab {
         position: absolute;
         bottom: 1rem;
-        right: 1rem;
+        right: 2rem;
     }
 
     .header {
