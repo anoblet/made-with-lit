@@ -1,6 +1,6 @@
 {
     "name": "@anoblet/made-with-lit",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -8,6 +8,7 @@
         "build:watch": "rollup -c etc/rollup.development.js -w",
         "commit": "git-cz",
         "dev": "npm-run-all -p build:watch start",
+        "publish": "npm run build && npm run service-worker && firebase deploy",
         "save": "git add . && git commit -m \"chore(app): save\"",
         "service-worker": "node bin/workbox-build.js && rollup -c etc/rollup.service-worker.js && rimraf tmp",
         "start": "node bin/server.js",
@@ -29,6 +30,7 @@
         "@babel/preset-typescript": "^7.8.3",
         "@open-wc/testing": "^2.5.7",
         "@open-wc/testing-karma": "^3.3.8",
+        "@rollup/plugin-json": "^4.0.3",
         "@rollup/plugin-node-resolve": "^7.1.1",
         "@rollup/plugin-replace": "^2.3.1",
         "@rollup/plugin-typescript": "^3.0.0",
@@ -55,6 +57,8 @@
     },
     "dependencies": {
         "@anoblet/firebase": "git+https://github.com/anoblet/firebase.git",
+        "@material/mwc-dialog": "^0.14.1",
+        "@material/mwc-fab": "^0.14.1",
         "@material/mwc-drawer": "^0.15.0",
         "@material/mwc-button": "^0.15.0",
         "@material/mwc-icon-button": "^0.15.0",

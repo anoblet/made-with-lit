@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import size from "rollup-plugin-size";
 import { terser } from "rollup-plugin-terser";
+import json from "@rollup/plugin-json";
 
 module.exports = {
     input: "./src/index.ts",
@@ -24,6 +25,7 @@ module.exports = {
                 comments: false
             }
         }),
-        size()
+        size(),
+        json()
     ]
 };

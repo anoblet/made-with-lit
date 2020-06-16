@@ -1,35 +1,109 @@
-import { getCollection } from "@anoblet/firebase";
-import { css, customElement, html, LitElement, property } from "lit-element";
-import "../components/form-component";
-import "../components/list-component";
+import * as firebase from "@anoblet/firebase";
+import { Collection, updateDocument } from "@anoblet/firebase";
+import "@material/mwc-button";
+import "@material/mwc-dialog";
+import { customElement, html, LitElement, property, query } from "lit-element";
+import { render } from "lit-html";
+import { ProjectCollection } from "../collections";
+import { FormComponent } from "../components/form-component/component";
+import "../components/grid-component/component";
+import type { GridComponent } from "../components/grid-component/component";
+import * as project from "../models/project.json";
 import sharedStyles from "../shared-styles";
+import style from "./page-index/style.css";
+import template from "./page-index/template.html";
 
 @customElement("page-index")
 export class PageIndexComponent extends LitElement {
-    @property({ type: Array }) items = [];
+    @property({ type: Array }) data = [];
+    @query("grid-component") grid: GridComponent;
+    @query("form-component") form: FormComponent;
+
+    collection: Collection = ProjectCollection;
+
+    public static get styles() {
+        return [sharedStyles, style];
+    }
+
+    public render = template.bind(this);
 
     constructor() {
         super();
-        getCollection("items", {
-            callback: (items: any[]) => (this.items = items),
-            orderBy: "created",
+        this.collection.subscribe((data) => (this.data = data));
+    }
+
+    addProject(event: CustomEvent) {
+        this.collection.add({
+            ...event.detail.data,
+            ...{
+                created: Date.now(),
+            },
         });
     }
 
-    public static get styles() {
-        return sharedStyles;
+    delete({ target }) {
+        const index = target.dataset.index;
+        firebase.deleteDocument(`items/${this.data[index].id}`);
+        // this.data.splice(index, 1);
+        // this.data = [...this.data];
     }
 
-    public render() {
-        return html`
-            <div class="grid">
-                <div class="card">
-                    <form-component></form-component>
-                </div>
-                <div class="card">
-                    <list-component .items=${this.items}></list-component>
-                </div>
-            </div>
-        `;
+    updateProject(event: CustomEvent) {
+        const data = event.detail.data;
+        updateDocument(`items/${data.id}`, data);
+    }
+
+    addItem() {
+        const dialogContainer = document.createElement("div");
+        const closed = (e: any) => {
+            if (e.target.tagName === "MWC-DIALOG") {
+                if (e.detail && e.detail.action === "save") {
+                    this.collection.add({
+                        ...this.form.data,
+                        ...{
+                            created: Date.now(),
+                        },
+                    });
+                }
+                this.renderRoot.removeChild(dialogContainer);
+            }
+        };
+        render(
+            html`<mwc-dialog @closed=${closed} heading="Add a project" open
+                ><form-component .model=${project}></form-component>
+                <mwc-button raised slot="primaryAction" dialogAction="save">
+                    Save
+                </mwc-button>
+            </mwc-dialog>`,
+            dialogContainer
+        );
+        this.renderRoot.appendChild(dialogContainer);
+    }
+
+    editItem({ target }) {
+        const index = target.dataset.index;
+        const item = this.collection.data[index];
+
+        const dialogContainer = document.createElement("div");
+        const closed = (e: any) => {
+            if (e.target.tagName === "MWC-DIALOG") {
+                if (e.detail && e.detail.action === "save")
+                    updateDocument(`items/${item.id}`, item);
+                this.renderRoot.removeChild(dialogContainer);
+            }
+        };
+        render(
+            html`<mwc-dialog @closed=${closed} heading="Update a project" open
+                ><form-component
+                    .data=${item}
+                    .model=${project}
+                ></form-component>
+                <mwc-button raised slot="primaryAction" dialogAction="save">
+                    Save
+                </mwc-button>
+            </mwc-dialog>`,
+            dialogContainer
+        );
+        this.renderRoot.appendChild(dialogContainer);
     }
 }

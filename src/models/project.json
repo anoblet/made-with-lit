@@ -1,0 +1,62 @@
+{
+    "collectionURI": "items",
+    "fields": [
+        {
+            "grid": {
+                "order": 1,
+                "width": "minmax(0, max-content)"
+            },
+            "name": "author",
+            "label": "Author",
+            "inputType": "text"
+        },
+        {
+            "grid": {
+                "order": 2,
+                "width": "auto"
+            },
+            "name": "name",
+            "label": "Name",
+            "inputType": "text",
+            "required": true
+        },
+        {
+            "grid": {
+                "order": 3,
+                "width": "minmax(0, max-content)"
+            },
+            "name": "url",
+            "label": "URL",
+            "inputType": "url",
+            "required": true
+        },
+
+        {
+            "grid": {
+                "order": 0,
+                "width": "minmax(0, max-content)"
+            },
+            "name": "category",
+            "label": "Category",
+            "inputType": "select",
+            "options": [
+                {
+                    "label": "Application",
+                    "value": "application"
+                },
+                {
+                    "label": "Component",
+                    "value": "component"
+                },
+                {
+                    "label": "Component Suite",
+                    "value": "component_suite"
+                },
+                {
+                    "label": "Miscellaneous",
+                    "value": "miscellaneous"
+                }
+            ]
+        }
+    ]
+}
