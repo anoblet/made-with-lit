@@ -62,7 +62,7 @@
         "@material/mwc-drawer": "^0.15.0",
         "@material/mwc-button": "^0.15.0",
         "@material/mwc-icon-button": "^0.15.0",
-        "@material/mwc-list": "^0.15.0",
+        "@material/mwc-list": "^0.17.2",
         "@material/mwc-menu": "^0.15.0",
         "@material/mwc-snackbar": "^0.15.0",
         "@material/mwc-textfield": "^0.15.0",
