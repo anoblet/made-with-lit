@@ -64,7 +64,7 @@
         "@material/mwc-icon-button": "^0.15.0",
         "@material/mwc-list": "^0.15.0",
         "@material/mwc-menu": "^0.15.0",
-        "@material/mwc-snackbar": "^0.15.0",
+        "@material/mwc-snackbar": "^0.17.2",
         "@material/mwc-textfield": "^0.15.0",
         "@material/mwc-top-app-bar": "^0.15.0",
         "@victorycto/web-utilities": "git+https://github.com/VictoryCTO/vp-lib.git",
