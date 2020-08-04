@@ -28,7 +28,7 @@
         "@babel/plugin-proposal-class-properties": "^7.8.3",
         "@babel/plugin-proposal-decorators": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
-        "@open-wc/testing": "^2.5.7",
+        "@open-wc/testing": "^2.5.20",
         "@open-wc/testing-karma": "^3.3.8",
         "@rollup/plugin-json": "^4.0.3",
         "@rollup/plugin-node-resolve": "^7.1.1",
