@@ -1,6 +1,5 @@
-/.firebase
-/coverage
+/.tsc
 /node_modules
-/public/scripts
+/package-lock.json
+/public/js
 /public/service-worker.js
-/tmp

@@ -12,12 +12,13 @@ export default css`
     #fab {
         position: absolute;
         bottom: 1rem;
-        right: 1rem;
+        right: 2rem;
     }
 
     .header {
         display: contents;
-        font-weight: bold;
+        --mdc-button-disabled-ink-color: rgba(0, 0, 0, 1);
+        --mdc-typography-button-font-weight: bold;
     }
 
     .header > * {
@@ -27,6 +28,10 @@ export default css`
         padding: 0.25rem 1.5rem;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    .header span {
+        text-transform: uppercase;
     }
 
     .row {
