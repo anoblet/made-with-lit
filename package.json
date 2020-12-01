@@ -61,7 +61,7 @@
         }
     },
     "dependencies": {
-        "workbox-window": "^5.0.0"
+        "workbox-window": "^6.0.0"
     },
     "husky": {
         "hooks": {
